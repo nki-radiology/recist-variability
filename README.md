@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 # Studying RECIST Variability with Computer Simulated Models 💻📈
-=======
-# Recist Variability with a simulation model
->>>>>>> Stashed changes
 
 Managed by Teresa Tareco-Bucho (t.tareco.bucho@nki.nl) and Stefano Trebeschi (s.trebeschi@nki.nl).
 
@@ -19,14 +15,14 @@ You can find the full publication pre-print at the following link: `TO ADD``
 - Rpy2 3.1.0
 - Seaborn
 
+``conda create -n recist_sim python=3.6``
+``pip install rpy2==3.1.0``
+``conda instakk tzlocal=2.1``
+
 ## 2. How to run the Simulation Model
 
-``TODO``
 
-## 3. How to run the Statistical Analysis
 
-``TODO``
+## 3. Contribution
 
-## 4. Contribution
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated. If you want to add your analysis, or have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again! 
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated. If you want to add your analysis, or have a suggestion that would make this better, please fork the 
