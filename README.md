@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 # Studying RECIST Variability with Computer Simulated Models 💻📈
+=======
+# Recist Variability with a simulation model
+>>>>>>> Stashed changes
 
 Managed by Teresa Tareco-Bucho (t.tareco.bucho@nki.nl) and Stefano Trebeschi (s.trebeschi@nki.nl).
 
