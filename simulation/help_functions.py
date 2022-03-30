@@ -9,7 +9,7 @@ def install_R_packages():
     
     ''' Install the necessary R packages'''
     package_names = ('stats', 'tmvtnorm', 'lme4', 'magic','statmod')
-    
+       
     if all(rpackages.isinstalled(x) for x in package_names):
         have_package = True
     
@@ -24,7 +24,6 @@ def install_R_packages():
         
         if len(packnames_to_install) > 0: 
             utils.install_packages(StrVector(packnames_to_install))
-
 
 
 def pool_of_measurable_lesions(lesions, per):
@@ -105,7 +104,9 @@ def plot_discordances(discordance, xrange, xlabel):
     
     lesion_rows = np.array([item for sublist in lesion_rows for item in sublist])
     lesion_index = np.array([item for sublist in lesion_index for item in sublist])
-    lesions_long_df = pd.DataFrame([lesion_rows,lesion_index]).T
+    lesions_long_df = pd.DataFrame([lesion_rows, lesion_index]).T
     lesions_long_df.columns = ['Discordance (%)', xlabel]
+    plt.figure()
     sns.lineplot(data=lesions_long_df, x=xlabel, y="Discordance (%)", ci = 'sd')
-    plt.show()
+    plt.savefig(xlabel + '.png')
+    #plt.show()

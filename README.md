@@ -14,7 +14,7 @@ You can find the full publication pre-print at the following link: `TO ADD``
 
 ``conda activate recist_sim``
 
-2. Install R, numpy, pandas seaborn and rpy2 (linux only)
+2. Install R, numpy, pandas, seaborn, rpy2 (linux only) and r-packages tmvtnorm and lme4
 ``conda install -c r r``
 
 ``conda install numpy pandas seaborn``
