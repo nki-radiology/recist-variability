@@ -26,7 +26,7 @@ You can find the full publication pre-print at the following link: `TO ADD``
 ``conda install -c conda-forge r-lme4``
 
 ## 2. How to run the Simulation Model
-In the ``run_simulation.py`` file, specify the inputs to the simulation model. Speficially, you can specify the number of readers, patients and repetitions, the ranges for Lmax, Omax, miu, and variances. Check the arguments of the ``simulation`` function. 
+In the ``run_simulation.py`` file, specify the inputs to the simulation model. Particularly, you can specify the number of readers, patients and repetitions, the ranges for Lmax, Omax, miu, and variances, among others. Check the arguments of the ``simulation`` function. 
 
 ``python run_simulation.py``
 
