@@ -4,8 +4,6 @@ import random
 import math
 from growth_simulation import dataset_simulation
 from help_functions import pool_of_measurable_lesions, simulate_readers, plot_discordances
-from IPython.display import set_matplotlib_formats
-set_matplotlib_formats('retina')
 
 def simulation(n_patients = 100, 
             n_readers = 100, 
@@ -23,7 +21,7 @@ def simulation(n_patients = 100,
             df_var_org = 11.60**2, 
             df_var_res = 36.62**2, 
             df_per = 20, 
-            which_var = [0,1,2,3,4,5], 
+            input_vars = [0,1,2,3,4,5], 
             verb = True, 
             plot_disc = True):
 
@@ -46,7 +44,7 @@ def simulation(n_patients = 100,
         percent_discordance_choice_of_lesions = np.zeros((reps,len(which_range)))
         percent_discordance_categories = np.zeros((reps,len(which_range)))
         
-        if i not in which_var:
+        if i not in input_vars:
             continue
         else:
         

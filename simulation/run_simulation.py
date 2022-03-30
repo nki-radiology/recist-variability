@@ -1,15 +1,13 @@
 from help_functions import install_R_packages
 from repeated_simulation_largest import simulation
-from IPython.display import set_matplotlib_formats
-set_matplotlib_formats('retina')
 
 ''' install the necessary R packages ''' 
 install_R_packages()
 
 ''' Define number of patients, n_readers and variables' ranges'''
-n_patients = 10
-n_readers = 10
-reps = 10
+n_patients = 100
+n_readers = 100
+reps = 100
 
 ''' Define default values'''
 df_organs = 8 

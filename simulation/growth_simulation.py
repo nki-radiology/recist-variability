@@ -6,11 +6,6 @@ import rpy2.robjects as robjects
 from rpy2.robjects.conversion import localconverter
 from rpy2.robjects import pandas2ri
 
-import matplotlib.pyplot as plt
-from IPython.display import set_matplotlib_formats
-set_matplotlib_formats('retina')
-
-
 def rpy2_to_pandas(r_df):
     ''' 
     To convert R variables to python
@@ -26,7 +21,7 @@ def dataset_simulation(n_organs_max, n_lesions_max, n_patients, mean_growth, var
         # make patiens have a random number of lesions/organs up until a maximum of n_lesions_max/n_organs_max
         n_lesions = random.randint(1,n_lesions_max)
         n_organs = random.randint(1,n_organs_max)
-        # R code. Numerical variables are converted to strings
+        # R: Numerical variables are converted to strings
         robjects.r('''
             library(tmvtnorm)
             library(lme4)
@@ -38,24 +33,15 @@ def dataset_simulation(n_organs_max, n_lesions_max, n_patients, mean_growth, var
             var_patients <- '''  + str(var_patients) + '''
             var_organs <- '''  + str(var_organs) + '''
             var_residuals <- '''  + str(var_residuals) + '''
-            # I updated this next line
             n_lesions_organ <- rmultinom(1,n_lesions, prob = rep(1/n_organs, n_organs))
             matrices <- lapply(n_lesions_organ, FUN = function(x){matrix(1,nrow = x,  ncol = x)})
             matrix_organs <- Reduce(adiag,matrices)
-            # print('matrix_organs')
-            # print(matrix_organs)
             matrix_patient <- matrix(1,ncol = n_lesions, nrow = n_lesions)
-            # print('matrix_patient')
-            # print(matrix_patient)
             matrix_residuals <- diag(1,n_lesions)
-            # print('matrix_residuals')
-            # print(matrix_residuals)
             matrix <- matrix_organs * var_organs + matrix_patient * var_patients + matrix_residuals  * var_residuals
-            # print('matrix')
-            # print(matrix)            
             growth_patient <- rtmvnorm(1, mean = rep(mean_growth, n_lesions), sigma = matrix, lower = rep(-100,n_lesions))''')
 
-        # Access R code variables
+        # Access R variables
         rkernel = rpy2_to_pandas(robjects.r.get('growth_patient'))
         n_lesion_organ = np.squeeze(rpy2_to_pandas(robjects.r.get('n_lesions_organ')))
         if n_organs ==1:
