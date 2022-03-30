@@ -30,7 +30,7 @@ In the ``run_simulation.py`` file, specify the inputs to the simulation model. S
 
 ``python run_simulation.py``
 
-If you encounter a ``libRlapack.so``/``libRblas.so`` error, do the following: 
+If you encounter a ``libRlapack.so``/``libRblas.so`` error, a workaround is: 
 
 ``cd /path_to_your_env/lib/``
 
