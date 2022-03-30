@@ -10,7 +10,7 @@ You can find the full publication pre-print at the following link: `TO ADD``
 ## 1. Requirements
 
 1. Create and activate a conda environment with Python
-``conda create -n recist_sim python`` # =3.7
+``conda create -n recist_sim python``
 
 ``conda activate recist_sim``
 
