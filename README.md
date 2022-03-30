@@ -11,11 +11,14 @@ You can find the full publication pre-print at the following link: `TO ADD``
 
 1. Create and activate a conda environment with Python
 ``conda create -n recist_sim python=3.7``
+
 ``conda activate recist_sim``
 
 2. Install R, numpy, pandas seaborn and rpy2 (linux only)
 ``conda install -c r r``
+
 ``conda install numpy pandas seaborn``
+
 ``pip install rpy2``
 
 ## 2. How to run the Simulation Model
@@ -26,9 +29,13 @@ In the ``run_simulation.py`` file, specify the inputs to the simulation model. S
 You might need to re-link:
 
 ``cd /path_to_your_env/lib/``
+
 ``ls -ltrh 'liblapack.so'``
+
 ``ls -ltrh 'libblas.so'``
+
 ``mv liblapack.so libRlapack.so``
+
 ``mv libblas.so libRblas.so``
 
 ## 3. Contribution
