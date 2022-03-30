@@ -10,7 +10,7 @@ You can find the full publication pre-print at the following link: `TO ADD``
 ## 1. Requirements
 
 1. Create and activate a conda environment with Python
-``conda create -n recist_sim python=3.7``
+``conda create -n recist_sim python`` # =3.7
 
 ``conda activate recist_sim``
 
@@ -21,18 +21,18 @@ You can find the full publication pre-print at the following link: `TO ADD``
 
 ``pip install rpy2``
 
+``conda install -c conda-forge r-tmvtnorm``
+
+``conda install -c conda-forge r-lme4``
+
 ## 2. How to run the Simulation Model
-In the ``run_simulation.py`` file, specify the inputs to the simulation model. Speficially, you can specify the number of readers, patients and repetitions, the ranges for Lmax, Omax, miu, and variances. Check the arguments of the ``simulation`` function. The necessary R libraries should be installed the first time you run it.
+In the ``run_simulation.py`` file, specify the inputs to the simulation model. Speficially, you can specify the number of readers, patients and repetitions, the ranges for Lmax, Omax, miu, and variances. Check the arguments of the ``simulation`` function. 
 
 ``python run_simulation.py``
 
 You might need to re-link:
 
 ``cd /path_to_your_env/lib/``
-
-``ls -ltrh 'liblapack.so'``
-
-``ls -ltrh 'libblas.so'``
 
 ``mv liblapack.so libRlapack.so``
 
