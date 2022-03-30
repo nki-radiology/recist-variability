@@ -30,6 +30,8 @@ In the ``run_simulation.py`` file, specify the inputs to the simulation model. P
 
 ``python run_simulation.py``
 
+If ``plot_disc = True``, the discordance plots will be save in your working directory.
+
 If you encounter a ``libRlapack.so``/``libRblas.so`` error, a workaround is: 
 
 ``cd /path_to_your_env/lib/``
