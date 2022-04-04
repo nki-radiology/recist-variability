@@ -7,39 +7,38 @@ RECIST is grounded on the assumption that target lesion selection is objective a
 In this repo, we share the code of the simulation model, and the statistical analysis performed in the publication. 
 You can find the full publication pre-print at the following link: `TO ADD``
 
-## 1. Requirements
-
-1. Create and activate a conda environment with Python
-``conda create -n recist_sim python``
-
-``conda activate recist_sim``
-
-2. Install R, numpy, pandas, seaborn, rpy2 (linux only) and r-packages tmvtnorm and lme4
-``conda install -c r r``
-
-``conda install numpy pandas seaborn``
-
-``pip install rpy2``
-
-``conda install -c conda-forge r-tmvtnorm``
-
-``conda install -c conda-forge r-lme4``
-
-## 2. How to run the Simulation Model
+## 1. Setting up the environment 🧱
+Create and activate a conda environment with Python
+ ```
+conda create -n recist_sim python
+conda activate recist_sim
+ ```
+Install the requirements (includes R)
+ ```
+conda install -c r r
+conda install numpy pandas seaborn
+pip install rpy2
+conda install -c conda-forge r-tmvtnorm
+conda install -c conda-forge r-lme4
+ ```
+ 
+## 2. How to run the Simulation Model 🚀 
 In the ``run_simulation.py`` file, specify the inputs to the simulation model. Particularly, you can specify the number of readers, patients and repetitions, the ranges for Lmax, Omax, miu, and variances, among others. Check the arguments of the ``simulation`` function. 
 
 ``python run_simulation.py``
 
 If ``plot_disc = True``, the discordance plots will be save in your working directory.
 
+
+## 3. Troubleshooting 🔨 
 If you encounter a ``libRlapack.so``/``libRblas.so`` error, a workaround is: 
+```
+cd /path_to_your_env/lib/
+mv liblapack.so libRlapack.so
+mv libblas.so libRblas.so
+```
+You can find more info at this [link](https://github.com/conda/conda/issues/10317)
 
-``cd /path_to_your_env/lib/``
-
-``mv liblapack.so libRlapack.so``
-
-``mv libblas.so libRblas.so``
-
-## 3. Contribution
+## 4. Contribution
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated. If you want to add your analysis, or have a suggestion that would make this better, please fork the 
