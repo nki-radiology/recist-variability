@@ -3,7 +3,7 @@ import pandas as pd
 import random
 import math
 from growth_simulation_fixed_lesions import dataset_simulation
-from help_functions import pool_of_measurable_lesions, simulate_readers, plot_discordances
+from help_functions import pool_of_measurable_lesions, simulate_readers, plot_discordances, simulate_readers_nontarget, simulate_readers_nontarget_adjudicator
 from IPython.display import set_matplotlib_formats
 set_matplotlib_formats('retina')
 
@@ -12,7 +12,7 @@ def simulation(n_patients = 100, n_readers = 100, reps = 100,
                var_pat_range = range(10,110,10), var_org_range = range(10,110,10), var_res_range = range(10,110,10),
                df_organs = 3, df_lesions = 10, df_mean_growth = 12.8, 
                df_var_pat = 44.55**2, df_var_org = 11.60**2, df_var_res = 36.62**2, 
-               df_per = 20, which_var = [0,1,2,3,4,5], verb = True, plot_disc = True):
+               df_per = 20, which_var = [0,1,2,3,4,5], verb = True, plot_disc = True, thr = 20, adj = 0):
 
     ranges = [n_organs_range, n_lesions_range, mean_growth_range, var_pat_range, var_org_range, var_res_range]
     xaxixes = ['Max. No. organs', 'Max. No. lesions', 'Mean Growth', 'Patients Variance ', 'Organs Variance', ' Residuals Variance']
@@ -83,7 +83,12 @@ def simulation(n_patients = 100, n_readers = 100, reps = 100,
                         ''' Define the lesions readers can choose from (eg: all lesions; only the largest by 20%)'''   
                         largest_lesions = pool_of_measurable_lesions(lesions, df_per)
                         ''' Simulate 'n_readers' and determine which categories each reader attributes to each patient''' 
-                        percent, categ = simulate_readers(n_readers, largest_lesions, percent, categ, pat_ind)
+                        if not adj and thr == None: # no adjudication and no non-target assessment
+                            percent, categ = simulate_readers(n_readers, largest_lesions, percent, categ, pat_ind)
+                        elif not adj and thr != None: # no adjudication, but non target assessment  
+                            percent, categ = simulate_readers_nontarget(n_readers, largest_lesions, percent, categ, pat_ind, thr)
+                        elif adj: # adjuducation, and non target assessment or not
+                            percent, categ = simulate_readers_nontarget_adjudicator(largest_lesions, percent, categ, pat_ind, thr)
 
                         ttbs_BL.append(lesions.sum()['size_BL'])
                         ttbs_FU.append(lesions.sum()['size_FU_for_TTB'])

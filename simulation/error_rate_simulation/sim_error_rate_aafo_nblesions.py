@@ -7,20 +7,28 @@ set_matplotlib_formats('retina')
 import seaborn as sns
 from matplotlib.pyplot import figure
 from sklearn.metrics import accuracy_score
+import warnings
+warnings.filterwarnings("ignore")
 
 ''' Define number of patients, n_readers and variables' ranges'''
-n_patients = 5
-n_readers = 5
-same_lesion_number_reps = 5
+n_patients = 10
+n_readers = 2
+same_lesion_number_reps = 2
+thr = None # if it is not None, then non-target disease is also assessed for PD, based on the threshold defined here
+adj = 1 # whether to do adjudication or not. If yes, then two or three readers evaluate each patient
 
 ''' Define default values'''
-df_organs = 4
 df_per = 20
 # immuno + chemo
 df_var_pat = 38.0**2
 df_var_org = 11.29**2
 df_var_res = 34.45**2
 df_mean_growth = 9.064
+df_organs = 4
+
+for df_organs in [2,4,8]:
+
+file_name = str(n_patients) + '_n_readers_' + str(n_readers) + '_thr_' + str(thr) + '_df_organs_' + str(df_organs) + '_adj_' + str(adj)
 
 n_lesions_range = range(3,21)
 
@@ -40,8 +48,10 @@ for rep in range(same_lesion_number_reps):
         df_var_res = df_var_res,
         df_mean_growth = df_mean_growth,
         which_var = [1],
+        thr = thr,
+        adj = adj,
         verb = False, plot_disc = False, df_per = df_per)
-    
+
     ttb_categs = []
     ttbs_percent = []
     
@@ -77,12 +87,13 @@ for rep in range(same_lesion_number_reps):
     
     percen = pd.DataFrame(percen)
     categ = pd.DataFrame(categ)
-    
+
+    categ = categ.loc[:, (categ != 0).any(axis=0)]        
     accs = []
     
     ''' iterate the lesions'''
     for l in n_lesions_range:
-               
+            
         ''' iterate the readers. Compute accuracy per reader '''
         data_categs = categ[categ.iloc[:,0] == l] # 0 is the position of the number of lesions
         ttb = data_categs.iloc[:,1] # 0 is the position of the number of ttb
@@ -100,7 +111,6 @@ for rep in range(same_lesion_number_reps):
         
     nblesions = np.unique(numb_lesions)
     all_accs[:,rep] = accs
-    
 
 correct_estimations = pd.DataFrame(all_accs)
 correct_estimations.insert(0,'nb_lesions', nblesions)
@@ -118,13 +128,13 @@ long_df['error'] = 1 - long_df['acc']
 fsize = 20
 figure(figsize=(8, 6))
 g = sns.lineplot(data=long_df, 
-                 x="nb_lesions", 
-                 y="error", 
-                 ci = 'sd',
-                 markers = True,
-                 marker='o',
-                 palette=['r', 'tab:blue'],
-                 )
+                x="nb_lesions", 
+                y="error", 
+                errorbar = 'sd',
+                markers = True,
+                marker='o',
+                #  palette=['r', 'tab:blue'],
+                )
 
 g.set_xlabel(r'$L$', fontsize=fsize+1, fontweight = 'bold')
 g.set_ylabel('Error Rate', fontsize=fsize+1, fontweight = 'bold')
@@ -139,4 +149,4 @@ g.set_yticks(list(s))
 g.set_yticklabels(list(s), fontsize = fsize)
 g.set_ylim([0,0.5])
 
-long_df.to_csv('mycsv.csv')
+long_df.to_csv(file_name + '.csv')
